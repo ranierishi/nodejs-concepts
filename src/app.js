@@ -65,11 +65,33 @@ app.put("/repositories/:id", (request, response) => {
 });
 
 app.delete("/repositories/:id", (request, response) => {
-  // TODO
+  const {id} = request.params
+
+  const result = repositories.findIndex(repository => repository.id === id)
+
+  if(result < 0){
+    return response.status(400).json({error: 'id inválido'})
+  }
+
+  repositories.splice(result)
+
+  return response.status(200).send()
+
 });
 
 app.post("/repositories/:id/like", (request, response) => {
-  // TODO
+  const {id} = request.params
+
+  const result = repositories.findIndex(repository => repository.id === id)
+
+  if(result < 0){
+    return response.status(400).json({error: 'id inválido'})
+  }
+
+  repositories[result].likes++
+
+  return response.json( repositories[result].likes)
+
 });
 
 module.exports = app;
