@@ -17,10 +17,9 @@ app.get("/repositories", (request, response) => {
 
 });
 
-app.post("/repositories", (request, response) => {
-    console.log('1')
+app.post("/repositories", (request, response) => {    
     const { title, url, techs} = request.body
-    console.log('2')
+    
 
     const repository = {
       id: uuid(),
@@ -73,7 +72,7 @@ app.delete("/repositories/:id", (request, response) => {
     return response.status(400).json({error: 'id inválido'})
   }
 
-  repositories.splice(result)
+  repositories.splice(result,1)
 
   return response.status(204).send()
 
